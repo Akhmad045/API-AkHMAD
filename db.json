@@ -1,0 +1,58 @@
+{
+  "siswa": [
+    {
+      "id": "4da5",
+      "nama_depan": "Muhammad",
+      "nama_belakang": "Aji Nugraha",
+      "alamat": "Cimaung",
+      "kelas": 10,
+      "jurusan": "RPL",
+      "tanggal_lahir": "2008-09-09"
+    },
+    {
+      "id": "9eb8",
+      "nama_depan": "fdsfds",
+      "nama_belakang": "sdfsdfsdf",
+      "alamat": "sdfsdf",
+      "kelas": "X",
+      "jurusan": "RPL",
+      "tanggal_lahir": "2024-01-03"
+    },
+    {
+      "id": "548a",
+      "nama_depan": "ddd",
+      "nama_belakang": "dddd",
+      "alamat": "dddd",
+      "kelas": "XI",
+      "jurusan": "RPL",
+      "tanggal_lahir": "2024-01-06"
+    },
+    {
+      "id": "34c8",
+      "nama_depan": "dddddd",
+      "nama_belakang": "ssss",
+      "alamat": "sssss",
+      "kelas": "XI",
+      "jurusan": "TKRO",
+      "tanggal_lahir": "2133-07-15"
+    },
+    {
+      "id": "57c3",
+      "nama_depan": "dd",
+      "nama_belakang": "ss",
+      "alamat": "ssss",
+      "kelas": "X",
+      "jurusan": "RPL",
+      "tanggal_lahir": ""
+    },
+    {
+      "id": "e103",
+      "nama_depan": "dd",
+      "nama_belakang": "ss",
+      "alamat": "ssss",
+      "kelas": "X",
+      "jurusan": "RPL",
+      "tanggal_lahir": ""
+    }
+  ]
+}

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data siswa</title>
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <!-- Main content -->
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between ">
+                <span class="card-title">Data siswa</span>
+                <button class="btn btn-primary btn-sm" id="tambah-siswa">
+                    <i class="bi bi-plus me-1"></i>Tambah
+                </button>
+            </div>
+            <div class="card-body">
+                <table class="table table-sm table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Lengkap</th>
+                            <th>Alamat</th>
+                            <th>kelas</th>
+                            <th>Tanggal Lahir</th>
+                            <th>#</th>
+                        </tr>
+                    </thead>
+                    <tbody id="hasil">
+                        <tr class="align-middle">
+                            <td>1</td>
+                            <td>Sibrol Malisi</td>
+                            <td>Ciseureuh</td>
+                            <td>X-RPL</td>
+                            <td>2008-09-09</td>
+                            <td>
+                                <button class="btn btn-sm btn-success"><i class="bi bi-pencil"></i></button>
+                                <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- End main content -->
+
+    <!-- Modal untuk form add dan update data siswa -->
+    <div class="modal" id="modal-siswa">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="modal-title">Form siswa</span>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" id="formData">
+                        <div class="mb-3">
+                            <label for="nama_depan" class="form-label">Nama depan</label>
+                            <input type="text" class="form-control" id="nama_depan">
+                        </div>
+                        <form action="" method="post" id="formData">
+                            <div class="mb-3">
+                                <label for="nama_depan" class="form-label">Nama Belakang</label>
+                                <input type="text" class="form-control" id="nama_belakang">
+                            </div>
+
+                            <form action="" method="post" id="formData">
+                                <div class="mb-3">
+                                    <label for="nama_depan" class="form-label">Alamat</label>
+                                    <input type="text" class="form-control" id="alamat">
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="nama_depan" class="form-label">Kelas</label>
+                                        <select class="form-select" name="kelas" id="kelas">
+                                            <option value="X">X</option>
+                                            <option value="XI">XI</option>
+                                            <option value="XII">XII</option>
+                                        </select>
+                                    </div>
+                                    <div class="col mb-3">
+                                        <label for="nama_depan" class="form-label">Jurusan</label>
+                                        <select class="form-select" name="jurusan" id="jurusan">
+                                            <option value="RPL">RPL</option>
+                                            <option value="TKR">TKR</option>
+                                            <option value="TKRO">TKRO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nama_depan" class="form-label">Tanggal Lahir</label>
+                                    <input type="date" class="form-control" id="tanggal_lahir">
+                                </div>
+                                <div class="mb-3">
+                                    <button id="simpan_siswa" class="btn btn-primary form-control" type="button">
+                                        <i class="bi bi-save-fill me-1"></i>Simpan
+                                    </button>
+
+                                </div>
+                            </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end modal -->
+
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let siswaModal = new bootstrap.Modal('#modal-siswa', {
+            backdrop: 'static', keyboard: false
+        })
+
+        // tampilkan modal dengan tombol tambah
+        document.getElementById('tambah-siswa').addEventListener('click', () => {
+            siswaModal.show()
+        })
+
+        let datasiswa = []
+
+        // event saat modal muncul
+        document.getElementById('modal-siswa').addEventListener('shown.bs.modal', () => {
+            document.getElementById('nama_depan').focus()
+        })
+        // buat function untuk tabel
+        function muat_tabel() {
+            let isiTabel = ""
+            // tampilkan data ke tabel
+            datasiswa.forEach(el => {
+                isiTabel += `
+                    <tr class="align-middle">
+                        <td>1</td>
+                        <td>${el.nama_depan} ${el.nama_belakang}</td>
+                        <td>${el.alamat}</td>
+                        <td>${el.kelas} - ${el.jurusan}</td>
+                        <td>${el.tanggal_lahir}</td>
+                        <td>
+                            <button class="btn btn-sm btn-success"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                        </td>
+                    </tr>
+                    `
+            })
+            document.getElementById('hasil').innerHTML = isiTabel
+        }
+
+        // menampilkan data
+        window.addEventListener('load', async () => {
+            await fetch('http://localhost:3000/siswa')
+                .then(res => res.json())
+                .then(data => {
+
+                    datasiswa = data
+                    muat_tabel()
+
+                })
+                .catch(err => {
+
+
+                })
+        })
+
+        // end menampilkan data
+
+        // menambahkan data
+        simpan_siswa.addEventListener('click', async () => {
+            await fetch('http://localhost:3000/siswa', {
+                method: 'post',
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    nama_depan: nama_depan.value,
+                    nama_belakang: nama_belakang.value,
+                    alamat: alamat.value,
+                    kelas: kelas.value,
+                    jurusan: jurusan.value,
+                    tanggal_lahir: tanggal_lahir.value
+                })
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                datasiswa.push(data)
+                muat_tabel()
+                siswaModal.hide()
+            })
+        })
+
+        // end menambahkan data
+    </script>
+</body>
+
+</html>
